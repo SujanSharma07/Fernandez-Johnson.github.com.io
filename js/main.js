@@ -1,303 +1,280 @@
-;(function () {
-	
-	'use strict';
+/**
+ * Fernandez & Johnson - Main JavaScript
+ */
 
-	var isMobile = {
-		Android: function() {
-			return navigator.userAgent.match(/Android/i);
-		},
-			BlackBerry: function() {
-			return navigator.userAgent.match(/BlackBerry/i);
-		},
-			iOS: function() {
-			return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-		},
-			Opera: function() {
-			return navigator.userAgent.match(/Opera Mini/i);
-		},
-			Windows: function() {
-			return navigator.userAgent.match(/IEMobile/i);
-		},
-			any: function() {
-			return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-		}
-	};
+// DOM Elements
+const navbar = document.getElementById('navbar');
+const scrollTopBtn = document.getElementById('scroll-top');
+const mobileNavToggle = document.querySelector('.nav-toggle');
+const mobileNav = document.querySelector('.mobile-nav');
+const testimonialDots = document.querySelectorAll('.testimonial-dots .dot');
+const testimonials = document.querySelectorAll('.testimonial');
+const yearSpan = document.getElementById('current-year');
 
-	var mobileMenuOutsideClick = function() {
+// Initialize AOS (Animate on Scroll)
+AOS.init({
+    duration: 800,
+    once: false,
+    easing: 'ease-in-out',
+});
 
-		$(document).click(function (e) {
-	    var container = $("#ftco-offcanvas, .js-ftco-nav-toggle");
-	    if (!container.is(e.target) && container.has(e.target).length === 0) {
+// Set current year in footer
+if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
+}
 
-	    	if ( $('body').hasClass('offcanvas') ) {
+// Navbar scroll effect
+function handleScroll() {
+    // Change navbar on scroll
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+    
+    // Show/hide scroll to top button
+    if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('visible');
+    } else {
+        scrollTopBtn.classList.remove('visible');
+    }
+}
 
-    			$('body').removeClass('offcanvas');
-    			$('.js-ftco-nav-toggle').removeClass('active');
-				
-	    	}
-	    
-	    	
-	    }
-		});
+// Toggle mobile navigation
+function toggleMobileNav() {
+    mobileNav.classList.toggle('active');
+    
+    // Toggle icon between bars and X
+    const icon = mobileNavToggle.querySelector('i');
+    if (mobileNav.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+    } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+    }
+}
 
-	};
+// Scroll to top functionality
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
 
+// Switch testimonials
+function showTestimonial(index) {
+    // Hide all testimonials
+    testimonials.forEach(testimonial => {
+        testimonial.classList.remove('active');
+    });
+    
+    // Remove active class from all dots
+    testimonialDots.forEach(dot => {
+        dot.classList.remove('active');
+    });
+    
+    // Show selected testimonial and activate dot
+    testimonials[index].classList.add('active');
+    testimonialDots[index].classList.add('active');
+}
 
-	var offcanvasMenu = function() {
+// Form handling with EmailJS for contact form
+function handleContactForm(event) {
+    event.preventDefault();
+    
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submit-btn');
+    const formMessages = document.getElementById('form-messages');
+    
+    // Clear previous messages
+    formMessages.innerHTML = '';
+    
+    // Basic validation
+    let isValid = true;
+    
+    // Get form fields
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const message = document.getElementById('message');
+    
+    // Reset previous error styling
+    const formControls = form.querySelectorAll('.form-control');
+    formControls.forEach(control => control.classList.remove('error'));
+    
+    // Validate name
+    if (!name.value.trim()) {
+        showError(name, 'Name is required');
+        isValid = false;
+    }
+    
+    // Validate email
+    if (!email.value.trim()) {
+        showError(email, 'Email is required');
+        isValid = false;
+    } else if (!isValidEmail(email.value.trim())) {
+        showError(email, 'Please enter a valid email address');
+        isValid = false;
+    }
+    
+    // Validate message
+    if (!message.value.trim()) {
+        showError(message, 'Message is required');
+        isValid = false;
+    }
+    
+    // If not valid, prevent form submission
+    if (!isValid) {
+        return false;
+    }
+    
+    // Show loading state
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    
+    // Get all form data
+    const formData = {
+        user_name: name.value,
+        user_email: email.value,
+        user_phone: document.getElementById('phone').value,
+        service: document.getElementById('service').value || 'Not specified',
+        message: message.value,
+        to_email: 'sujansharma202@gmail.com'  // The email address to send to
+    };
+    
+    // Send the email using EmailJS
+    // Replace these values with your actual EmailJS service ID and template ID
+    // You'll need to create these in your EmailJS account
+    emailjs.send('service_id', 'template_id', formData)
+        .then(function(response) {
+            // Success message
+            formMessages.innerHTML = `
+                <div class="alert-success">
+                    <i class="fas fa-check-circle"></i> Your message has been sent successfully! We will contact you soon.
+                </div>
+            `;
+            
+            // Reset form
+            form.reset();
+            
+            // Reset button
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+            
+            console.log('SUCCESS!', response.status, response.text);
+        }, function(error) {
+            // Error message
+            formMessages.innerHTML = `
+                <div class="alert-error">
+                    <i class="fas fa-exclamation-circle"></i> Oops! An error occurred while sending your message. Please try again.
+                </div>
+            `;
+            
+            // Reset button
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+            
+            console.log('FAILED...', error);
+        });
+    
+    return false;
+}
 
-		$('#page').prepend('<div id="ftco-offcanvas" />');
-		$('#page').prepend('<a href="#" class="js-ftco-nav-toggle ftco-nav-toggle ftco-nav-white"><i></i></a>');
-		var clone1 = $('.menu-1 > ul').clone();
-		$('#ftco-offcanvas').append(clone1);
-		var clone2 = $('.menu-2 > ul').clone();
-		$('#ftco-offcanvas').append(clone2);
+// Helper function to show form error
+function showError(field, message) {
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'form-error';
+    errorDiv.textContent = message;
+    
+    field.parentNode.appendChild(errorDiv);
+    field.classList.add('error');
+}
 
-		$('#ftco-offcanvas .has-dropdown').addClass('offcanvas-has-dropdown');
-		$('#ftco-offcanvas')
-			.find('li')
-			.removeClass('has-dropdown');
+// Helper function to show success message (used for non-EmailJS fallback)
+function showSuccessMessage(form) {
+    // Clear form fields
+    form.reset();
+    
+    // Create success message
+    const successDiv = document.createElement('div');
+    successDiv.className = 'alert-success';
+    successDiv.innerHTML = '<i class="fas fa-check-circle"></i> Your message has been sent successfully! We will contact you soon.';
+    
+    // Add success message to form
+    document.getElementById('form-messages').innerHTML = '';
+    document.getElementById('form-messages').appendChild(successDiv);
+    
+    // Remove success message after 5 seconds
+    setTimeout(() => {
+        successDiv.remove();
+    }, 5000);
+}
 
-		// Hover dropdown menu on mobile
-		$('.offcanvas-has-dropdown').mouseenter(function(){
-			var $this = $(this);
+// Helper function to validate email
+function isValidEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
 
-			$this
-				.addClass('active')
-				.find('ul')
-				.slideDown(500, 'easeOutExpo');				
-		}).mouseleave(function(){
-
-			var $this = $(this);
-			$this
-				.removeClass('active')
-				.find('ul')
-				.slideUp(500, 'easeOutExpo');				
-		});
-
-
-		$(window).resize(function(){
-
-			if ( $('body').hasClass('offcanvas') ) {
-
-    			$('body').removeClass('offcanvas');
-    			$('.js-ftco-nav-toggle').removeClass('active');
-				
-	    	}
-		});
-	};
-
-
-	var burgerMenu = function() {
-
-		$('body').on('click', '.js-ftco-nav-toggle', function(event){
-			var $this = $(this);
-
-
-			if ( $('body').hasClass('overflow offcanvas') ) {
-				$('body').removeClass('overflow offcanvas');
-			} else {
-				$('body').addClass('overflow offcanvas');
-			}
-			$this.toggleClass('active');
-			event.preventDefault();
-
-		});
-	};
-
-	var fullHeight = function() {
-
-		if ( !isMobile.any() ) {
-			$('.js-fullheight').css('height', $(window).height());
-			$(window).resize(function(){
-				$('.js-fullheight').css('height', $(window).height());
-			});
-		}
-
-	};
-
-
-
-	var contentWayPoint = function() {
-		var i = 0;
-		$('.animate-box').waypoint( function( direction ) {
-
-			if( direction === 'down' && !$(this.element).hasClass('animated-fast') ) {
-				
-				i++;
-
-				$(this.element).addClass('item-animate');
-				setTimeout(function(){
-
-					$('body .animate-box.item-animate').each(function(k){
-						var el = $(this);
-						setTimeout( function () {
-							var effect = el.data('animate-effect');
-							if ( effect === 'fadeIn') {
-								el.addClass('fadeIn animated-fast');
-							} else if ( effect === 'fadeInLeft') {
-								el.addClass('fadeInLeft animated-fast');
-							} else if ( effect === 'fadeInRight') {
-								el.addClass('fadeInRight animated-fast');
-							} else {
-								el.addClass('fadeInUp animated-fast');
-							}
-
-							el.removeClass('item-animate');
-						},  k * 200, 'easeInOutExpo' );
-					});
-					
-				}, 100);
-				
-			}
-
-		} , { offset: '85%' } );
-	};
-
-
-	var dropdown = function() {
-
-		$('.has-dropdown').mouseenter(function(){
-
-			var $this = $(this);
-			$this
-				.find('.dropdown')
-				.css('display', 'block')
-				.addClass('animated-fast fadeInUpMenu');
-
-		}).mouseleave(function(){
-			var $this = $(this);
-
-			$this
-				.find('.dropdown')
-				.css('display', 'none')
-				.removeClass('animated-fast fadeInUpMenu');
-		});
-
-	};
-
-
-	var goToTop = function() {
-
-		$('.js-gotop').on('click', function(event){
-			
-			event.preventDefault();
-
-			$('html, body').animate({
-				scrollTop: $('html').offset().top
-			}, 500, 'easeInOutExpo');
-			
-			return false;
-		});
-
-		$(window).scroll(function(){
-
-			var $win = $(window);
-			if ($win.scrollTop() > 200) {
-				$('.js-top').addClass('active');
-			} else {
-				$('.js-top').removeClass('active');
-			}
-
-		});
-	
-	};
-
-
-	// Loading page
-	var loaderPage = function() {
-		$(".ftco-loader").fadeOut("slow");
-	};
-
-	var counter = function() {
-		$('.js-counter').countTo({
-			 formatter: function (value, options) {
-	      return value.toFixed(options.decimals);
-	    },
-		});
-	};
-
-	var counterWayPoint = function() {
-		if ($('#ftco-counter').length > 0 ) {
-			$('#ftco-counter').waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-					setTimeout( counter , 400);					
-					$(this.element).addClass('animated');
-				}
-			} , { offset: '90%' } );
-		}
-	};
-
-	var parallax = function() {
-
-		if ( !isMobile.any() ) {
-			$(window).stellar({
-				horizontalScrolling: false,
-				hideDistantElements: false, 
-				responsive: true
-
-			});
-		}
-	};
-
-	var testimonialCarousel = function(){
-		
-		var owl = $('.owl-carousel-fullwidth');
-		owl.owlCarousel({
-			items: 1,
-			loop: true,
-			margin: 0,
-			nav: false,
-			dots: true,
-			smartSpeed: 800,
-			autoHeight: true
-		});
-	};
-
-	var sliderMain = function() {
-		
-	  	$('#ftco-hero .flexslider').flexslider({
-			animation: "fade",
-			slideshowSpeed: 5000,
-			directionNav: true,
-			start: function(){
-				setTimeout(function(){
-					$('.slider-text').removeClass('animated fadeInUp');
-					$('.flex-active-slide').find('.slider-text').addClass('animated fadeInUp');
-				}, 500);
-			},
-			before: function(){
-				setTimeout(function(){
-					$('.slider-text').removeClass('animated fadeInUp');
-					$('.flex-active-slide').find('.slider-text').addClass('animated fadeInUp');
-				}, 500);
-			}
-
-	  	});
-
-	  	$('#ftco-hero .flexslider .slides > li').css('height', $(window).height());	
-	  	$(window).resize(function(){
-	  		$('#ftco-hero .flexslider .slides > li').css('height', $(window).height());	
-	  	});
-
-	};
-
-	
-	$(function(){
-		mobileMenuOutsideClick();
-		offcanvasMenu();
-		burgerMenu();
-		contentWayPoint();
-		sliderMain();
-		dropdown();
-		goToTop();
-		loaderPage();
-		counterWayPoint();
-		counter();
-		parallax();
-		testimonialCarousel();
-		fullHeight();
-	});
-
-
-}());
+// Add event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    // Load event listeners
+    window.addEventListener('scroll', handleScroll);
+    
+    // Mobile navigation toggle
+    if (mobileNavToggle) {
+        mobileNavToggle.addEventListener('click', toggleMobileNav);
+    }
+    
+    // Scroll to top button
+    if (scrollTopBtn) {
+        scrollTopBtn.addEventListener('click', scrollToTop);
+    }
+    
+    // Testimonial navigation
+    testimonialDots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showTestimonial(index));
+    });
+    
+    // Automatically switch testimonials every 5 seconds
+    let currentTestimonial = 0;
+    const testimonialsInterval = setInterval(() => {
+        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+        showTestimonial(currentTestimonial);
+    }, 5000);
+    
+    // Contact form handling with EmailJS
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleContactForm);
+    }
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            // Skip links that are just "#"
+            if (this.getAttribute('href') === '#') return;
+            
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                // Close mobile nav if open
+                if (mobileNav.classList.contains('active')) {
+                    toggleMobileNav();
+                }
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80, // Account for fixed header
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Handle page load
+    handleScroll();
+});

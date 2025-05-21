@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>Our Services | Fernandez & Johnson</title>
+    <meta name="description" content="Explore Fernandez & Johnson's legal services including Family Law, Immigration Law, Wills & Estate, Litigation, Conveyancing, and more.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        /* Additional styles for the Services page */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .service-block {
+            padding: 2.5rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .service-block:last-child {
+            border-bottom: none;
+        }
+        
+        .service-heading {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-heading h3 {
+            margin-bottom: 0;
+        }
+        
+        .service-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--color-primary);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .service-icon-wrapper i {
+            font-size: 1.5rem;
+        }
+        
+        .service-content {
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-image {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-layout .service-image {
+                order: 1;
+                margin-bottom: 1.5rem;
+            }
+            
+            .grid-layout .service-details {
+                order: 2;
+            }
+            
+            .service-block {
+                padding: 1.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header id="navbar" class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <span>Fernandez <span class="highlight">&</span> Johnson</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="nav-menu">
+                    <ul class="nav-links">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="about.html" class="nav-link">About</a></li>
+                        <li><a href="services.html" class="nav-link active">Services</a></li>
+                        <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Mobile Navigation Toggle -->
+                <div class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div class="mobile-nav">
+                <ul class="mobile-nav-links">
+                    <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+                    <li><a href="about.html" class="mobile-nav-link">About</a></li>
+                    <li><a href="services.html" class="mobile-nav-link active">Services</a></li>
+                    <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header -->
+        <section id="page-header" class="hero">
+            <div class="container">
+                <div class="section-header centered">
+                    <h1 data-aos="fade-up">Our Legal Services</h1>
+                    <p data-aos="fade-up" data-aos-delay="100">
+                        Comprehensive legal solutions tailored to your specific needs
+                    </p>
+                </div>
+            </div>
+            <div class="wave-divider"></div>
+        </section>
+
+        <!-- Services Introduction -->
+        <section id="services-intro" class="section bg-white">
+            <div class="container">
+                <div class="section-content centered" data-aos="fade-up">
+                    <h2>Comprehensive Legal Solutions</h2>
+                    <p>
+                        We specialize in a wide range of legal areas including Family Law, Immigration Law, Wills & Estate, Litigation, Conveyancing, Buying and Selling of Business, and Criminal Law including Intervention Orders. Our multilingual team speaks Punjabi, Hindi, Tamil, and Bahasa Melayu for your convenience.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Services -->
+        <section id="detailed-services" class="section bg-light">
+            <div class="container">
+                <!-- Family Law -->
+                <div id="family-law" class="service-block">
+                    <div class="grid-layout">
+                        <div class="service-details" data-aos="fade-right">
+                            <div class="service-heading">
+                                <div class="service-icon-wrapper">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3>Family Law</h3>
+                            </div>
+                            <div class="service-content">
+                                <p>
+                                    Our family law practice provides comprehensive legal support for divorce proceedings, child custody arrangements, property settlements, child support, and domestic violence interventions. We understand the emotional nature of family disputes and offer compassionate guidance through these challenging times.
+                                </p>
+                            </div>
+                            <a href="contact.html" class="link-arrow">
+                                Consult with us about Family Law
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="service-image" data-aos="fade-left">
+                            <img src="https://images.unsplash.com/photo-1590650046871-92c887180603?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&h=600" alt="Family Law">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Immigration Law -->
+                <div id="immigration-law" class="service-block">
+                    <div class="grid-layout">
+                        <div class="service-image" data-aos="fade-right">
+                            <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&h=600" alt="Immigration Law">
+                        </div>
+                        <div class="service-details" data-aos="fade-left">
+                            <div class="service-heading">
+                                <div class="service-icon-wrapper">
+                                    <i class="fas fa-passport"></i>
+                                </div>
+                                <h3>Immigration Law</h3>
+                            </div>
+                            <div class="service-content">
+                                <p>
+                                    Our immigration law services cover visa applications, appeals at the AAT, representation at the Federal Circuit Court, citizenship applications, sponsor applications, and deportation defense. Our multilingual team ensures clear communication throughout your immigration journey.
+                                </p>
+                            </div>
+                            <a href="contact.html" class="link-arrow">
+                                Consult with us about Immigration Law
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wills & Estate -->
+                <div id="wills-estate" class="service-block">
+                    <div class="grid-layout">
+                        <div class="service-details" data-aos="fade-right">
+                            <div class="service-heading">
+                                <div class="service-icon-wrapper">
+                                    <i class="fas fa-file-contract"></i>
+                                </div>
+                                <h3>Wills & Estate</h3>
+                            </div>
+                            <div class="service-content">
+                                <p>
+                                    We assist clients in preparing wills, establishing powers of attorney, creating advance care directives, and managing probate applications. Our estate planning services ensure your assets are protected and distributed according to your wishes.
+                                </p>
+                            </div>
+                            <a href="contact.html" class="link-arrow">
+                                Consult with us about Wills & Estate
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="service-image" data-aos="fade-left">
+                            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&h=600" alt="Wills & Estate">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Litigation -->
+                <div id="litigation" class="service-block">
+                    <div class="grid-layout">
+                        <div class="service-image" data-aos="fade-right">
+                            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&h=600" alt="Litigation">
+                        </div>
+                        <div class="service-details" data-aos="fade-left">
+                            <div class="service-heading">
+                                <div class="service-icon-wrapper">
+                                    <i class="fas fa-balance-scale"></i>
+                                </div>
+                                <h3>Litigation</h3>
+                            </div>
+                            <div class="service-content">
+                                <p>
+                                    Our litigation practice represents clients in court proceedings for civil disputes, contract breaches, property disputes, and debt recovery. We develop strategic approaches to achieve favorable outcomes while minimizing stress and costs.
+                                </p>
+                            </div>
+                            <a href="contact.html" class="link-arrow">
+                                Consult with us about Litigation
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conveyancing -->
+                <div id="conveyancing" class="service-block">
+                    <div class="grid-layout">
+                        <div class="service-details" data-aos="fade-right">
+                            <div class="service-heading">
+                                <div class="service-icon-wrapper">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <h3>Conveyancing</h3>
+                            </div>
+                            <div class="service-content">
+                                <p>
+                                    Our conveyancing services handle property transfers, contract reviews, title searches, settlement coordination, and guidance on property regulations. We ensure your property transactions proceed smoothly and all legal requirements are fulfilled.
+                                </p>
+                            </div>
+                            <a href="contact.html" class="link-arrow">
+                                Consult with us about Conveyancing
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="service-image" data-aos="fade-left">
+                            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&h=600" alt="Conveyancing">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Services -->
+                <div id="business-services" class="service-block">
+                    <div class="grid-layout">
+                        <div class="service-image" data-aos="fade-right">
+                            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&h=600" alt="Business Services">
+                        </div>
+                        <div class="service-details" data-aos="fade-left">
+                            <div class="service-heading">
+                                <div class="service-icon-wrapper">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <h3>Business Services</h3>
+                            </div>
+                            <div class="service-content">
+                                <p>
+                                    We provide comprehensive legal support for business acquisitions and sales, contract drafting and review, commercial lease agreements, business structure advice, and dispute resolution. Our goal is to protect your business interests at every stage.
+                                </p>
+                            </div>
+                            <a href="contact.html" class="link-arrow">
+                                Consult with us about Business Services
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Criminal Law -->
+                <div id="criminal-law" class="service-block">
+                    <div class="grid-layout">
+                        <div class="service-details" data-aos="fade-right">
+                            <div class="service-heading">
+                                <div class="service-icon-wrapper">
+                                    <i class="fas fa-gavel"></i>
+                                </div>
+                                <h3>Criminal Law</h3>
+                            </div>
+                            <div class="service-content">
+                                <p>
+                                    Our criminal law practice offers representation for various offenses, intervention order assistance, bail applications, sentencing submissions, and appeals. We work diligently to protect your rights throughout the criminal justice process.
+                                </p>
+                            </div>
+                            <a href="contact.html" class="link-arrow">
+                                Consult with us about Criminal Law
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="service-image" data-aos="fade-left">
+                            <img src="https://images.unsplash.com/photo-1589578527966-fdac0f44566c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&h=600" alt="Criminal Law">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="cta" class="section bg-white">
+            <div class="container">
+                <div class="cta-box bg-primary text-white text-center" data-aos="fade-up">
+                    <div class="cta-content" style="margin: 0 auto;">
+                        <h3>Ready to Discuss Your Legal Needs?</h3>
+                        <p style="max-width: 600px; margin: 0 auto 1.5rem;">
+                            Our team of experienced attorneys is ready to provide you with the legal assistance you need. Contact us today to schedule a consultation.
+                        </p>
+                    </div>
+                    <a href="contact.html" class="btn btn-primary">Schedule a Consultation</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Fernandez & Johnson</h4>
+                    <p>Serving the Box Hill community with excellence in legal services since 1980.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html#family-law">Family Law</a></li>
+                        <li><a href="services.html#immigration-law">Immigration Law</a></li>
+                        <li><a href="services.html#wills-estate">Wills & Estate</a></li>
+                        <li><a href="services.html#litigation">Litigation</a></li>
+                        <li><a href="services.html#conveyancing">Conveyancing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Suite 9, 14 Albert St, Blackburn Vic 3130</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>03-98991599</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>harjit@fernandezjohnson.com.au</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> Fernandez & Johnson. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top" class="scroll-top-btn" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- AOS (Animate On Scroll) -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+</body>
+</html>
