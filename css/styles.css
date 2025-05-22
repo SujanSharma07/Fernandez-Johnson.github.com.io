@@ -304,14 +304,16 @@ ul {
 .mobile-nav {
     display: none;
     background-color: var(--color-neutral);
-    padding: 1rem 0;
+    padding: 0;  /* Changed from 1rem 0 */
     overflow: hidden;
-    height: 0;
-    transition: height 0.3s ease;
+    max-height: 0;
+    transition: max-height 0.3s ease;
 }
 
 .mobile-nav.active {
-    height: auto;
+    display: block;
+    max-height: 500px; /* Adjust based on your content height */
+    padding: 1rem;   /* Move padding here */
 }
 
 .mobile-nav-link {
